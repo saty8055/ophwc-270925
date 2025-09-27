@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Jun 6, 2018 7:17:42 PM by Hibernate Tools 5.2.6.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="false">
+    <class catalog="ophwc" dynamic-insert="false" dynamic-update="false" mutable="true" name="com.gcs.ophwc.services.persistance.dao.entity.VideoCallHistory" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="video_call_history">
+        <id name="id" type="java.lang.Long">
+            <column name="id"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one class="com.gcs.ophwc.services.persistance.dao.entity.User" embed-xml="true" fetch="select" insert="true" name="user" not-found="exception" optimistic-lock="true" unique="false" update="true" lazy="false">
+            <column name="calledFromUserId"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="calledToNumber" optimistic-lock="true" type="string" unique="false">
+            <column length="45" name="calledToNumber"/>
+        </property>
+        <property generated="never" lazy="false" name="duration" optimistic-lock="true" type="string" unique="false">
+            <column length="45" name="duration"/>
+        </property>
+        <property generated="never" lazy="false" name="createdDate" optimistic-lock="true" type="timestamp" unique="false">
+            <column length="19" name="createdDate"/>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Jun 6, 2018 7:17:42 PM by Hibernate Tools 5.2.6.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="false">
+    <class catalog="ophwc" dynamic-insert="false" dynamic-update="false" mutable="true" name="com.gcs.ophwc.services.persistance.dao.entity.User" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="user">
+        <id name="id" type="java.lang.Long">
+            <column name="id"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one class="com.gcs.ophwc.services.persistance.dao.entity.Divisions" embed-xml="true"  fetch="select" insert="true" name="divisions" not-found="exception" optimistic-lock="true" unique="false" update="true" lazy="false">
+            <column name="division_id" not-null="false"/>
+        </many-to-one>
+        <many-to-one class="com.gcs.ophwc.services.persistance.dao.entity.UserTypes" embed-xml="true" fetch="select" insert="true" name="userTypes" not-found="exception" optimistic-lock="true" unique="false" update="true" lazy="false">
+            <column name="user_type" not-null="true"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="username" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="username" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="password" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="password" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="firstName" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="first_name"/>
+        </property>
+        <property generated="never" lazy="false" name="lastName" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="last_name"/>
+        </property>
+        <property generated="never" lazy="false" name="phoneNum" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="phone_num"/>
+        </property>
+        <property generated="never" lazy="false" name="emailId" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="email_id"/>
+        </property>
+        <property generated="never" lazy="false" name="userImage" optimistic-lock="true" type="binary" unique="false">
+            <column name="user_image"/>
+        </property>
+        <property generated="never" lazy="false" name="status" optimistic-lock="true" type="string" unique="false">
+            <column length="2" name="status" not-null="true"/>
+        </property>
+        <!-- <set embed-xml="true" fetch="select" inverse="true" lazy="false" mutable="true" name="videoCallHistories" optimistic-lock="true" sort="unsorted" table="video_call_history">
+            <key on-delete="noaction">
+                <column name="calledFromUserId"/>
+            </key>
+            <one-to-many class="com.gcs.ophwc.services.persistance.dao.entity.VideoCallHistory" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="false" mutable="true" name="projectsesForAssignTo" optimistic-lock="true" sort="unsorted" table="projects">
+            <key on-delete="noaction">
+                <column name="assign_to" not-null="true"/>
+            </key>
+            <one-to-many class="com.gcs.ophwc.services.persistance.dao.entity.Projects" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="false" mutable="true" name="siteVisits" optimistic-lock="true" sort="unsorted" table="site_visit">
+            <key on-delete="noaction">
+                <column name="created_user" not-null="true"/>
+            </key>
+            <one-to-many class="com.gcs.ophwc.services.persistance.dao.entity.SiteVisit" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="false" mutable="true" name="projectResourceses" optimistic-lock="true" sort="unsorted" table="project_resources">
+            <key on-delete="noaction">
+                <column name="resource_id" not-null="true"/>
+            </key>
+            <one-to-many class="com.gcs.ophwc.services.persistance.dao.entity.ProjectResources" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="false" mutable="true" name="projectsesForCreatedUser" optimistic-lock="true" sort="unsorted" table="projects">
+            <key on-delete="noaction">
+                <column name="created_user" not-null="true"/>
+            </key>
+            <one-to-many class="com.gcs.ophwc.services.persistance.dao.entity.Projects" embed-xml="true" not-found="exception"/>
+        </set> -->
+    </class>
+</hibernate-mapping>

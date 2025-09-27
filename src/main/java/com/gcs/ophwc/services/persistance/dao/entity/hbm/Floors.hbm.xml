@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Jun 6, 2018 7:17:42 PM by Hibernate Tools 5.2.6.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property"
+	default-cascade="none" default-lazy="false">
+	<class dynamic-insert="false" dynamic-update="false"
+		mutable="true" name="com.gcs.ophwc.services.persistance.dao.entity.Floors"
+		optimistic-lock="version" polymorphism="implicit"
+		select-before-update="false" table="floors">
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="identity" />
+		</id>
+
+		<property generated="never" lazy="false" name="floorNo"
+			optimistic-lock="true" type="java.lang.Integer" unique="false">
+			<column length="11" name="floor_no" />
+		</property>
+		<property generated="never" lazy="false" name="floorName"
+			optimistic-lock="true" type="string" unique="false">
+			<column length="100" name="floor_name" />
+		</property>
+		<property generated="never" lazy="false" name="status"
+			optimistic-lock="true" type="string" unique="false">
+			<column length="10" name="status" />
+		</property>
+
+	</class>
+</hibernate-mapping>

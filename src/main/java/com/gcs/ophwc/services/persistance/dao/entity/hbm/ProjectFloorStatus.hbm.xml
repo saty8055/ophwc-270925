@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Jun 6, 2018 7:17:42 PM by Hibernate Tools 5.2.6.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property"
+	default-cascade="none" default-lazy="false">
+	<class catalog="ophwc" dynamic-insert="false" dynamic-update="false"
+		mutable="true" name="com.gcs.ophwc.services.persistance.dao.entity.ProjectFloorStatus"
+		optimistic-lock="version" polymorphism="implicit"
+		select-before-update="false" table="project_floor_status">
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="identity" />
+		</id>
+
+		<many-to-one class="com.gcs.ophwc.services.persistance.dao.entity.Projects"
+			embed-xml="true" fetch="select" insert="true" name="project"
+			not-found="exception" optimistic-lock="true" unique="false" update="true"
+			lazy="false">
+			<column name="project_id" />
+		</many-to-one>
+		
+		<many-to-one class="com.gcs.ophwc.services.persistance.dao.entity.Floors"
+			embed-xml="true" fetch="select" insert="true" name="floor"
+			not-found="exception" optimistic-lock="true" unique="false" update="true"
+			lazy="false">
+			<column name="floor_id" />
+		</many-to-one>
+		
+		<many-to-one class="com.gcs.ophwc.services.persistance.dao.entity.FloorWork"
+			embed-xml="true" fetch="select" insert="true" name="floorWork"
+			not-found="exception" optimistic-lock="true" unique="false" update="true"
+			lazy="false">
+			<column name="work_id" />
+		</many-to-one>
+		
+		<many-to-one class="com.gcs.ophwc.services.persistance.dao.entity.ProjectStatus"
+			embed-xml="true" fetch="select" insert="true" name="projectStatus"
+			not-found="exception" optimistic-lock="true" unique="false" update="true"
+			lazy="false">
+			<column name="status" />
+		</many-to-one>
+
+	</class>
+</hibernate-mapping>

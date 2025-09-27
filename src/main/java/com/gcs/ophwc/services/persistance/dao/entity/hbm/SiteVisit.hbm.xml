@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Jun 6, 2018 7:17:42 PM by Hibernate Tools 5.2.6.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="false">
+    <class dynamic-insert="false" dynamic-update="false" mutable="true" name="com.gcs.ophwc.services.persistance.dao.entity.SiteVisit" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="site_visit">
+        <id name="id" type="java.lang.Long">
+            <column name="id"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one class="com.gcs.ophwc.services.persistance.dao.entity.ProjectStatus" embed-xml="true" fetch="select" insert="true" name="projectStatus" not-found="exception" optimistic-lock="true" unique="false" update="true" lazy="false">
+            <column name="construction_status" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="com.gcs.ophwc.services.persistance.dao.entity.Projects" embed-xml="true" fetch="select" insert="true" name="projects" not-found="exception" optimistic-lock="true" unique="false" update="true" lazy="false">
+            <column name="project_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="com.gcs.ophwc.services.persistance.dao.entity.User" embed-xml="true" fetch="select" insert="true" name="user" not-found="exception" optimistic-lock="true" unique="false" update="true" lazy="false">
+            <column name="created_user" not-null="true"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="image" optimistic-lock="true" type="binary" unique="false">
+            <column name="image"/>
+        </property>
+        <property generated="never" lazy="false" name="imagePath" optimistic-lock="true" type="string" unique="false">
+            <column length="200" name="image_path"/>
+        </property>
+        <property generated="never" lazy="false" name="comments" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="comments"/>
+        </property>
+        
+        <property generated="never" lazy="false" name="latitude" optimistic-lock="true" type="string" unique="false">
+            <column name="latitude" not-null="true" precision="22" scale="0"/>
+        </property>
+        <property generated="never" lazy="false" name="langitude" optimistic-lock="true" type="string" unique="false">
+            <column name="langitude" not-null="true" precision="22" scale="0"/>
+        </property>
+        <property generated="never" lazy="false" name="constructionPercentage" optimistic-lock="true" type="string" unique="false">
+            <column name="construction_percentage" not-null="true" length="10"/>
+        </property>
+        
+        <property generated="never" lazy="false" name="createdDate" optimistic-lock="true" type="timestamp" unique="false">
+            <column length="10" name="created_date"/>
+        </property>
+    </class>
+</hibernate-mapping>

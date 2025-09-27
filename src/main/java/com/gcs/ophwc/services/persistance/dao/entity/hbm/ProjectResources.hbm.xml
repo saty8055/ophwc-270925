@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Jun 6, 2018 7:17:42 PM by Hibernate Tools 5.2.6.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="false">
+    <class catalog="ophwc" dynamic-insert="false" dynamic-update="false" mutable="true" name="com.gcs.ophwc.services.persistance.dao.entity.ProjectResources" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="project_resources">
+        <id name="id" type="java.lang.Long">
+            <column name="id"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one class="com.gcs.ophwc.services.persistance.dao.entity.Projects" embed-xml="true" fetch="select" insert="true" name="projects" not-found="exception" optimistic-lock="true" unique="false" update="true" lazy="false">
+            <column name="project_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="com.gcs.ophwc.services.persistance.dao.entity.User" embed-xml="true" fetch="select" insert="true" name="user" not-found="exception" optimistic-lock="true" unique="false" update="true" lazy="false">
+            <column name="user_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="com.gcs.ophwc.services.persistance.dao.entity.NatureOfWork" embed-xml="true" fetch="select" insert="true" name="natureOfProject" not-found="exception" optimistic-lock="true" unique="false" update="true" lazy="false">
+            <column name="nature_of_project" not-null="true"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="status" optimistic-lock="true" type="string" unique="false">
+            <column length="2" name="status" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

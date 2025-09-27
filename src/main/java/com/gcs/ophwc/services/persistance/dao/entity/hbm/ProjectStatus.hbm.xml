@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Jun 6, 2018 7:17:42 PM by Hibernate Tools 5.2.6.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property"
+	default-cascade="none" default-lazy="false">
+	<class dynamic-insert="false" dynamic-update="false"
+		mutable="true" name="com.gcs.ophwc.services.persistance.dao.entity.ProjectStatus"
+		optimistic-lock="version" polymorphism="implicit"
+		select-before-update="false" table="project_status">
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="identity" />
+		</id>
+		<property generated="never" lazy="false" name="status"
+			optimistic-lock="true" type="string" unique="false">
+			<column name="status" not-null="true" />
+		</property>
+		<property generated="never" lazy="false" name="checkStatus"
+			optimistic-lock="true" type="string" unique="false">
+			<column name="check_status" not-null="true" />
+		</property>
+	</class>
+</hibernate-mapping>

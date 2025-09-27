@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:ws="http://jax-ws.dev.java.net/spring/core"
+	xmlns:wss="http://jax-ws.dev.java.net/spring/servlet"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd 
+        http://www.springframework.org/schema/tx 
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/util 
+        http://www.springframework.org/schema/util/spring-util.xsd
+        http://jax-ws.dev.java.net/spring/core 
+        http://jax-ws.dev.java.net/spring/core.xsd
+        http://jax-ws.dev.java.net/spring/servlet 
+        http://jax-ws.dev.java.net/spring/servlet.xsd"
+	default-autowire="byName">
+
+	<bean id="contextApplicationContextProvider" class="com.gcs.ophwc.services.context.AppContext"></bean>
+	<bean id="propertyPlaceholder"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreUnresolvablePlaceholders" value="false" />
+		<property name="ignoreResourceNotFound" value="false" />
+		<property name="order" value="1" />
+		<property name="locations">
+			<list>
+				<!-- <value>classpath:hibernate_hsqldb.properties</value> -->
+				<value>classpath:hibernate_mysql.properties</value>
+				<value>classpath:settings.properties</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${db1.hibernate.connection.driver_class}" />
+		<property name="url" value="${db1.hibernate.connection.url}" />
+		<property name="username" value="${db1.hibernate.connection.username}" />
+		<property name="password" value="${db1.hibernate.connection.password}" />
+	</bean>
+
+	<!-- NEW CONFIGRATION STARTS -->
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="persistenceXmlLocation" value="classpath:ophwc-persistence.xml" />
+		<property name="persistenceUnitName" value="ophwc" />
+		<property name="dataSource" ref="dataSource" />
+		<property name="persistenceUnitPostProcessors">
+			<list>
+				<bean
+					class="org.springframework.data.jpa.support.ClasspathScanningPersistenceUnitPostProcessor">
+					<constructor-arg name="basePackage"
+						value="com.gcs.ophwc.services.persistance.dao.entity.hbm" />
+					<property name="mappingFileNamePattern" value="**/*hbm.xml" />
+				</bean>
+			</list>
+		</property>
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="showSql" value="true" />
+				<property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" />
+			</bean>
+		</property>
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.dialect">${db1.hibernate.dialect}</prop>
+				<prop key="hibernate.show_sql">${db1.hibernate.show_sql}</prop>
+				<prop key="hibernate.hbm2ddl.auto">${db1.hibernate.hbm2ddl.auto}</prop>
+				<prop key="hibernate.cache.provider_class">${db1.hibernate.cache.provider_class}</prop>
+				<prop key="hibernate.cache.use_query_cache">${db1.hibernate.cache.use_query_cache}</prop>
+				<prop key="hibernate.max_fetch_depth">${db1.hibernate.max_fetch_depth}</prop>
+				<prop key="hibernate.proxool.pool_alias">PoolDb1</prop>
+				<prop key="hibernate.jdbc.batch_versioned_data">${db1.hibernate.jdbc.batch_versioned_data}</prop>
+				<prop key="hibernate.jdbc.batch_size">${db1.hibernate.jdbc.batch_size}</prop>
+				<prop key="hibernate.jdbc.use_streams_for_binary">${db1.hibernate.jdbc.use_streams_for_binary}</prop>
+
+				<prop key="hibernate.c3p0.max_size">${db1.hibernate.c3p0.max_size}</prop>
+				<prop key="hibernate.c3p0.min_size">${db1.hibernate.c3p0.min_size}</prop>
+				<prop key="hibernate.c3p0.timeout">${db1.hibernate.c3p0.timeout}</prop>
+				<prop key="hibernate.c3p0.max_statements">${db1.hibernate.c3p0.max_statements}</prop>
+				<prop key="hibernate.c3p0.idle_test_period">${db1.hibernate.c3p0.idle_test_period}</prop>
+				<prop key="hibernate.c3p0.acquire_increment">${db1.hibernate.c3p0.acquire_increment}</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- <bean id="user" class="com.gcs.ophwc.services.persistance.dao.impl.UserDao"> 
+		</bean> <bean id="ophwcService" class="com.gcs.ophwc.services.service.impl.OphwcServiceImpl"> 
+		<property name="userDao" ref="user"></property> </bean> <bean class="com.gcs.ophwc.services.resources.OphwcResource"> 
+		<property name="ophwcService" ref="ophwcService"></property> </bean> -->
+
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+
+	<tx:annotation-driven />
+	<bean id="persistenceExceptionTranslationPostProcessor"
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+	<!-- NEW CONFIGURATION ENDS -->
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED"></tx:method>
+		</tx:attributes>
+	</tx:advice>
+	<aop:config>
+		<aop:pointcut id="iEcmServiceMethods"
+			expression="execution(* com.gcs.ophwc.services.service.*.*(..))"></aop:pointcut>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="iEcmServiceMethods"></aop:advisor>
+	</aop:config>
+
+
+	<context:annotation-config />
+	<context:component-scan base-package="com.gcs.ophwc.services" />
+</beans>

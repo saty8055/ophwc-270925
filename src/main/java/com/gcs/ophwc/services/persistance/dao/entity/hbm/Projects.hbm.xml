@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Jun 6, 2018 7:17:42 PM by Hibernate Tools 5.2.6.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="false">
+    <class catalog="ophwc" dynamic-insert="false" dynamic-update="false" mutable="true" name="com.gcs.ophwc.services.persistance.dao.entity.Projects" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="projects">
+        <id name="id" type="java.lang.Long">
+            <column name="id"/>
+            <generator class="identity"/>
+        </id>
+        
+        <many-to-one class="com.gcs.ophwc.services.persistance.dao.entity.Divisions" embed-xml="true" fetch="select" insert="true" name="divisions" not-found="exception" optimistic-lock="true" unique="false" update="true" lazy="false">
+            <column name="project_division" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="com.gcs.ophwc.services.persistance.dao.entity.User" embed-xml="true" fetch="select" insert="true" name="createdUser" not-found="exception" optimistic-lock="true" unique="false" update="true" lazy="false">
+            <column name="created_user" not-null="true"/>
+        </many-to-one>
+         <many-to-one class="com.gcs.ophwc.services.persistance.dao.entity.User" embed-xml="true" fetch="select" insert="true" name="assignTo" not-found="exception" optimistic-lock="true" unique="false" update="true" lazy="false">
+            <column name="assign_to"/>
+        </many-to-one>
+        <many-to-one class="com.gcs.ophwc.services.persistance.dao.entity.NatureOfWork" embed-xml="true" fetch="select" insert="true" name="natureOfProject" not-found="exception" optimistic-lock="true" unique="false" update="true" lazy="false">
+            <column name="natur_of_project"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="projectName" optimistic-lock="true" type="string" unique="false">
+            <column length="200" name="project_name" not-null="true"/>
+        </property>
+         <property generated="never" lazy="false" name="projectDefination" optimistic-lock="true" type="string" unique="false">
+            <column length="200" name="project_defination" />
+        </property>
+        <property generated="never" lazy="false" name="projectLocation" optimistic-lock="true" type="string" unique="false">
+            <column length="70" name="project_location" />
+        </property>
+        <property generated="never" lazy="false" name="latitude" optimistic-lock="true" type="string" unique="false">
+            <column name="latitude"  precision="22" scale="0"/>
+        </property>
+        <property generated="never" lazy="false" name="langitude" optimistic-lock="true" type="string" unique="false">
+            <column name="langitude"  precision="22" scale="0"/>
+        </property>
+       
+        <property generated="never" lazy="false" name="status" optimistic-lock="true" type="string" unique="false">
+            <column length="2" name="status"/>
+        </property>
+        <property generated="never" lazy="false" name="projectLogo" optimistic-lock="true" type="binary" unique="false">
+            <column name="project_logo"/>
+        </property>
+        <property generated="never" lazy="false" name="clientName" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="client_name"/>
+        </property>
+        <property generated="never" lazy="false" name="comments" optimistic-lock="true" type="string" unique="false">
+            <column length="250" name="comments"/>
+        </property>
+        
+        <property generated="never" lazy="false" name="isHandovered" optimistic-lock="true" type="string" unique="false">
+            <column length="2" name="is_handovered"/>
+        </property>
+        <!-- <set embed-xml="true" fetch="select" inverse="true" lazy="false" mutable="true" name="projectResourceses" optimistic-lock="true" sort="unsorted" table="project_resources">
+            <key on-delete="noaction">
+                <column name="project_id" not-null="true"/>
+            </key>
+            <one-to-many class="com.gcs.ophwc.services.persistance.dao.entity.ProjectResources" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="false" mutable="true" name="siteVisits" optimistic-lock="true" sort="unsorted" table="site_visit">
+            <key on-delete="noaction">
+                <column name="project_id" not-null="true"/>
+            </key>
+            <one-to-many class="com.gcs.ophwc.services.persistance.dao.entity.SiteVisit" embed-xml="true" not-found="exception"/>
+        </set> -->
+    </class>
+</hibernate-mapping>
