@@ -63,8 +63,7 @@ public class LoginController {
 	public String login(ModelMap model) {
 		System.out.println("login");
 		try {
-
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection connection = DriverManager.getConnection(dataSource.getUrl(),
 					dataSource.getUsername(), dataSource.getPassword());
 			System.out.print("CONNECTED");
@@ -90,15 +89,20 @@ public class LoginController {
 				return "redirect:/admin_dashboard";
 			else if (user.getUserTypes().getTypeName().equalsIgnoreCase("HO User")) {
 				return "redirect:/hoDashboard";
-			} else if (user.getUserTypes().getTypeName().equalsIgnoreCase("Super Division User")) {
+			} else if (user.getUserTypes().getTypeName().equalsIgnoreCase("Division User")
+					|| user.getUserTypes().getTypeName().equalsIgnoreCase("Super Division User")) {
 				return "redirect:/superDivisionDashboard";
+			} else {
+				// User type not handled — deny access gracefully
+				sessionobj.setValidLogin(false);
+				sessionobj.setUser(null);
+				sessionobj.setStatusMessage("User type not authorized for access");
+				return "login";
 			}
-
 		} else {
 			sessionobj.setStatusMessage("Please Enter Valid Credentials");
 			return "login";
 		}
-		return null;
 	}
 
 	@RequestMapping(value = "/hoDashboard", method = RequestMethod.GET)

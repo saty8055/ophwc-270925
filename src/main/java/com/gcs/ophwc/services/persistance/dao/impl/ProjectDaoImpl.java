@@ -505,7 +505,8 @@ public class ProjectDaoImpl extends OphwcDaoSupport<Projects, Long> implements P
 				"SELECT SUM(amount) FROM ProjectAmount WHERE project IN (SELECT id FROM Projects WHERE divisions="
 						+ divId + " and isHandovered!='Y') AND year(fromDate)=" + year + " AND year(toDate)=" + year
 						+ " and MONTH(fromDate)=" + month + " AND MONTH(toDate)=" + month);
-		return (String) sumQuery.getResultList().get(0);
+		Object result = sumQuery.getResultList().get(0);
+		return result != null ? result.toString() : null;
 	}
 
 	@Override
@@ -516,7 +517,8 @@ public class ProjectDaoImpl extends OphwcDaoSupport<Projects, Long> implements P
 						+ divId + " AND natureOfProject=" + natureId + " and isHandovered!='Y') AND year(fromDate)="
 						+ year + " AND year(toDate)=" + year + " and MONTH(fromDate)=" + month + " AND MONTH(toDate)="
 						+ month);
-		return (String) sumQuery.getResultList().get(0);
+		Object result = sumQuery.getResultList().get(0);
+		return result != null ? result.toString() : null;
 	}
 
 	@Override
@@ -525,7 +527,8 @@ public class ProjectDaoImpl extends OphwcDaoSupport<Projects, Long> implements P
 		Query sumQuery = getEntityManager().createQuery(
 				"SELECT SUM(amount) FROM ProjectAmount WHERE project IN (SELECT id FROM Projects WHERE divisions="
 						+ divId + " and isHandovered!='Y')");
-		return (String) sumQuery.getResultList().get(0);
+		Object result = sumQuery.getResultList().get(0);
+		return result != null ? result.toString() : null;
 	}
 
 	@Override
@@ -534,7 +537,8 @@ public class ProjectDaoImpl extends OphwcDaoSupport<Projects, Long> implements P
 		Query sumQuery = getEntityManager().createQuery(
 				"SELECT SUM(amount) FROM ProjectAmount WHERE project IN (SELECT id FROM Projects WHERE divisions="
 						+ divId + " AND natureOfProject=" + natureId + " and isHandovered!='Y')");
-		return (String) sumQuery.getResultList().get(0);
+		Object result = sumQuery.getResultList().get(0);
+		return result != null ? result.toString() : null;
 	}
 
 	@Override
@@ -547,9 +551,8 @@ public class ProjectDaoImpl extends OphwcDaoSupport<Projects, Long> implements P
 			amount = amountList.get(0);
 			Query sumQuery = getEntityManager()
 					.createQuery("SELECT SUM(amount) FROM ProjectAmount WHERE project=" + projId);
-			String totalAmnt = (String) sumQuery.getResultList().get(0);
-			if (totalAmnt == null)
-				totalAmnt = "0";
+			Object result = sumQuery.getResultList().get(0);
+			String totalAmnt = result != null ? result.toString() : "0";
 			amount.setTotalAmnt(totalAmnt);
 		} else
 			amount = new ProjectAmount();
